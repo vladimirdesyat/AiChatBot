@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33530.505
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AiChatBot", "AiChatBot.csproj", "{EDDF2326-59DB-4DA9-A67A-18A9EE01E3AB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{77A683B3-39D4-44B7-BF8C-696EE2D63F77}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EDDF2326-59DB-4DA9-A67A-18A9EE01E3AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDDF2326-59DB-4DA9-A67A-18A9EE01E3AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDDF2326-59DB-4DA9-A67A-18A9EE01E3AB}.Debug|x64.ActiveCfg = Debug|x64
+		{EDDF2326-59DB-4DA9-A67A-18A9EE01E3AB}.Debug|x64.Build.0 = Debug|x64
+		{EDDF2326-59DB-4DA9-A67A-18A9EE01E3AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDDF2326-59DB-4DA9-A67A-18A9EE01E3AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDDF2326-59DB-4DA9-A67A-18A9EE01E3AB}.Release|x64.ActiveCfg = Release|x64
+		{EDDF2326-59DB-4DA9-A67A-18A9EE01E3AB}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EDDF2326-59DB-4DA9-A67A-18A9EE01E3AB} = {77A683B3-39D4-44B7-BF8C-696EE2D63F77}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EE7047C3-655E-4258-A804-08B0901E98B5}
+	EndGlobalSection
+EndGlobal
