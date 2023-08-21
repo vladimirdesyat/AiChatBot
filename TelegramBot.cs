@@ -22,6 +22,8 @@ namespace AiChatBot
                 {
                     var input = Llama.Ai(message.Text);
                     await botClient.SendTextMessageAsync(message.Chat, input.Result);
+                    input.Dispose();
+                    Thread.Sleep(1000);
                     return;
                 }
             }
