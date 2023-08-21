@@ -15,17 +15,13 @@ namespace AiChatBot
             {                
                 if (message?.Text?.ToLower() == "/start")
                 {
-                    Console.WriteLine(message.Text);
                     await botClient.SendTextMessageAsync(message.Chat, "Hi, how can i help you?");
                     return;
                 }
-                else if (message?.Text != null && message.Text.ToLower() != "/start")
+                else if (!string.IsNullOrEmpty(message?.Text) && message.Text.ToLower() != "/start")
                 {
-                    Console.WriteLine(message.Text);
                     var input = Llama.Ai(message.Text);
-
                     await botClient.SendTextMessageAsync(message.Chat, input.Result);
-
                     return;
                 }
             }
