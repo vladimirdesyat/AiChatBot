@@ -1,5 +1,5 @@
 # AiChatBot
-Telegram Chat Bot with Llama.net Ai. Can answer directly in Telegram chat in one session. After each question Llama restarts.
+Telegram Chat Bot with LlamaSharp Ai. Can answer directly in Telegram chat in one session. After each question Llama restarts.
 
 Just start app and type your question in chat. You need bot token to make app work. You can get token from @BotFather, when you create your Telegram bot.
 
