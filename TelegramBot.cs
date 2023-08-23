@@ -19,7 +19,7 @@ namespace AiChatBot
                 else if (!string.IsNullOrEmpty(update.Message?.Text) && update.Message.Text.ToLower() != "/start")
                 {
                     var input = new Prompt();
-                    await botClient.SendTextMessageAsync(update.Message.Chat, Prompt.Ai(update.Message.Text).Result);
+                    await botClient.SendTextMessageAsync(update.Message.Chat, input.Ai(update.Message.Text).Result);
 
                     input.Dispose();
                     GC.Collect();
