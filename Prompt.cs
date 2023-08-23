@@ -25,8 +25,11 @@ namespace AiChatBot
 
         public void Dispose()
         {
+            DisposeManagedResources();
             Console.WriteLine("LlamaSharp has been deleted.");
         }
+
+        protected virtual void DisposeManagedResources() { }
     }
 }
    
