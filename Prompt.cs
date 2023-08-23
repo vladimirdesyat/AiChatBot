@@ -1,8 +1,6 @@
 ﻿using LLama.Common;
 using LLama;
 using Telegram.Bot.Types;
-using System;
-using Telegram.Bot.Requests;
 
 namespace AiChatBot 
 {
