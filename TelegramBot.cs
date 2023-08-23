@@ -1,6 +1,5 @@
-﻿using System.Text.Json;
+﻿using DocumentFormat.OpenXml.Office2010.Excel;
 using Telegram.Bot;
-using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 
 namespace AiChatBot
@@ -15,13 +14,16 @@ namespace AiChatBot
                 if (update.Message?.Text?.ToLower() == "/start")
                 {
                     await botClient.SendTextMessageAsync(update.Message.Chat, "Hi, how can i help you?");
+                    _ = DataBase.Query(update.Message.Chat.Id);
                 }
                 else if (!string.IsNullOrEmpty(update.Message?.Text) && update.Message.Text.ToLower() != "/start")
                 {
-                    var input = Llama.Ai(update.Message.Text);
-                    await botClient.SendTextMessageAsync(update.Message.Chat, input.Result);
+                    var input = new Prompt();
+                    await botClient.SendTextMessageAsync(update.Message.Chat, Prompt.Ai(update.Message.Text).Result);
+
                     input.Dispose();
-                    Thread.Sleep(1000);
+                    GC.Collect();
+                    GC.WaitForPendingFinalizers();
                 }
             }
         }
