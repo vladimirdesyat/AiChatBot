@@ -21,8 +21,8 @@ namespace AiChatBot
                     await botClient.SendTextMessageAsync(update.Message.Chat, input.Ai(update.Message).Result);
 
                     input.Dispose();
-                    GC.Collect();
-                    GC.WaitForPendingFinalizers();
+                    // GC.Collect();
+                    // GC.WaitForPendingFinalizers();
                 }
             }
         }
