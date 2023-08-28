@@ -5,26 +5,24 @@ namespace AiChatBot
 {
     class Program
     {
-        static void Main()
+        static async Task Main()
         {
-            var tgBot = new TelegramBot();            
+            var telegramBot = new TelegramBot();
 
-            Console.WriteLine("Started bot " + tgBot.botClient.GetMeAsync().Result.FirstName);
+            var firstName = (await telegramBot.botClient.GetMeAsync()).FirstName;
+            
+            Console.WriteLine($"Started bot {firstName}");
 
-            _ = DataBase.CreateTable();
+            await DataBase.CreateTable();
 
-            var cts = new CancellationTokenSource();
-            var cancellationToken = cts.Token;
-            var receiverOptions = new ReceiverOptions
-            {
-                AllowedUpdates = { }, // receive all update types
-            };
-
-            tgBot.botClient.StartReceiving(
-                tgBot.HandleUpdateAsync,
-                tgBot.HandleErrorAsync,
-                receiverOptions,
-                cancellationToken
+            telegramBot.botClient.StartReceiving(
+                telegramBot.HandleUpdateAsync,
+                telegramBot.HandleErrorAsync,
+                new ReceiverOptions
+                {
+                    AllowedUpdates = { }
+                },
+                new CancellationTokenSource().Token
             );           
 
             Console.ReadLine();

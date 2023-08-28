@@ -8,23 +8,20 @@ namespace AiChatBot
         public ITelegramBotClient botClient = new TelegramBotClient("Token");
         public async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
         {
-            if (update.Type == Telegram.Bot.Types.Enums.UpdateType.Message)
-            {                
-                if (update.Message?.Text?.ToLower() == "/start")
-                {
-                    await botClient.SendTextMessageAsync(update.Message.Chat, "Hi, how can i help you?");
-                    _ = DataBase.Query(update.Message.Chat.Id);
-                }
-                else if (!string.IsNullOrEmpty(update.Message?.Text) && update.Message.Text.ToLower() != "/start")
-                {
-                    var input = new Prompt();
-                    await botClient.SendTextMessageAsync(update.Message.Chat, input.Ai(update.Message).Result);
-
-                    input.Dispose();
-                    // GC.Collect();
-                    // GC.WaitForPendingFinalizers();
-                }
+            if (update.Type != Telegram.Bot.Types.Enums.UpdateType.Message
+                || string.IsNullOrWhiteSpace(update.Message?.Text))
+                return;
+            if (update.Message.Text.ToLower() == "/start")
+            {
+                await botClient.SendTextMessageAsync(update.Message.Chat, "Hi, how can i help you?");
+                await DataBase.Query(update.Message.Chat.Id);
             }
+            else 
+            {
+                await botClient.SendTextMessageAsync(
+                    update.Message.Chat, Prompt.InitAi(update.Message));
+            }
+        
         }
 
         public async Task<Task> HandleErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)

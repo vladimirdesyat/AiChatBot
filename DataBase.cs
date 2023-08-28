@@ -5,49 +5,57 @@ namespace AiChatBot
 {
     internal class DataBase
     {
-        public static SqlConnection connect = new SqlConnection(@"Server=localhost;Database=master;Trusted_Connection=True;");
-        public static string query = "CREATE TABLE CHATSESSIONS(CHAT_ID BIGINT,ID_SESSION char(50))";
+        private const string CONNECTION_STRING = @"Server=localhost;Database=master;Trusted_Connection=True;";
+        private const string QUERY = "CREATE TABLE CHATSESSIONS(CHAT_ID BIGINT,ID_SESSION char(50))";
         public static async Task CreateTable()
         {
-            connect.Open();
-            try
+            using (var connect = new SqlConnection(CONNECTION_STRING))
             {
-                _ = new SqlCommand(query, connect).ExecuteReader();
-                Console.WriteLine("Created table CHATSESSIONS.");
-                if (connect.State == ConnectionState.Open)
+                connect.Open();
+
+                try
                 {
-                    connect.Close();
+                    await new SqlCommand(QUERY, connect).ExecuteReaderAsync();
+                    Console.WriteLine("Created table CHATSESSIONS.");
                 }
-            }
-            catch
-            {
-                Console.WriteLine("Table already exists.");
-                // Console.WriteLine(e);
-                if (connect.State == ConnectionState.Open)
+                catch
                 {
-                    connect.Close();
+                    Console.WriteLine("Table already exists.");
+                    
                 }
-            }
+                finally
+                {
+                    if (connect.State == ConnectionState.Open)
+                    {
+                        connect.Close();
+                    }
+                }
+            }            
         }
         public static async Task Query(long chatId)
         {
-            connect.Open();
-            try
+            using (var connect = new SqlConnection(CONNECTION_STRING))
             {
-                query = "INSERT INTO CHATSESSIONS(CHAT_ID, ID_SESSION)";
-                query += $"VALUES('{chatId}','{DateTime.Now}')";
-                _ = new SqlCommand(query, connect).ExecuteReader();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Query not initialized.");
-                Console.WriteLine(e);
-                if (connect.State == ConnectionState.Open)
+                connect.Open();
+                try
                 {
-                    connect.Close();
+                    string QUERY = "INSERT INTO CHATSESSIONS(CHAT_ID, ID_SESSION)";
+                    QUERY += $"VALUES('{chatId}','{DateTime.Now}')";
+                    await new SqlCommand(QUERY, connect).ExecuteReaderAsync();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Query not initialized.");
+                    Console.WriteLine(e);
+                }
+                finally
+                {
+                    if (connect.State == ConnectionState.Open)
+                    {
+                        connect.Close();
+                    }
                 }
             }
-            
         }
         
     }
